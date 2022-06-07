@@ -1,5 +1,5 @@
 import "./App.css";
-import { Button } from "@material-ui/core";
+
 import { CssBaseline, Grid } from "@material-ui/core";
 
 // 元件
@@ -20,7 +20,6 @@ function App() {
           <Map />
         </Grid>
       </Grid>
-      <Button variant="contained">Hello World</Button>
     </>
   );
 }
