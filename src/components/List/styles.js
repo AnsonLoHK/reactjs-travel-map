@@ -29,5 +29,9 @@ export default makeStyles((theme) =>
     root: {
       backgroundColor: "",
     },
+    paper: {
+      height: 140,
+      width: 100,
+    },
   })
 );
