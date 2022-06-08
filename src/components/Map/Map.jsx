@@ -7,22 +7,37 @@ import { Paper, Typography } from "@material-ui/core";
 
 import useStyles from "./styles";
 
-const Map = () => {
+const Map = ({ setCoordinates, setBounds, coordinates }) => {
   const classes = useStyles();
   // const matches = useMediaQuery("(min-width:600px)");
-  const coordinates = { lat: 0, lng: 0 };
+
+  const onChange = (e) => {
+    console.log("onChange", e);
+    // 0608 座標在日本 (可能跟vpn位置有關)
+    setCoordinates({ lat: e.center.lat, lng: e.center.lng });
+    // 邊界
+    setBounds({ ne: e.marginBounds.ne, sw: e.marginBounds.sw });
+  };
+  const onChildClick = (e) => {
+    console.log("onChildClick", e);
+  };
   return (
-    <div className={classes.mapContainer}>
-      <GoogleMapReact
-        bootstrapURLKeys={{ key: "AIzaSyBHYJlzoMf9fPj6MIAlUYC3RnS8rmqHtkg" }}
-        defaultCenter={coordinates}
-        center={coordinates}
-        defaultZoom={14}
-        margin={[50, 50, 50, 50]}
-      ></GoogleMapReact>
-      <Paper />
-      <Typography />
-    </div>
+    <>
+      <div className={classes.mapContainer}>
+        <GoogleMapReact
+          bootstrapURLKeys={{ key: "AIzaSyBOubLjCL-vfB8Zol4e8cdBzdvpNF_pGdI" }}
+          defaultZoom={17}
+          defaultCenter={coordinates}
+          center={coordinates}
+          margin={[50, 50, 50, 50]}
+          options={""}
+          onChange={onChange}
+          onChildClick={onChildClick}
+        ></GoogleMapReact>
+        <Paper />
+        <Typography />
+      </div>
+    </>
   );
 };
 

@@ -10,15 +10,26 @@ import List from "./components/List/List";
 import Map from "./components/Map/Map";
 
 function App() {
-  const [posts, setPosts] = useState([]);
+  const [places, setPlaces] = useState([]);
+  const [coordinates, setCoordinates] = useState({});
+  const [bounds, setBounds] = useState(null);
+  const [count, setCount] = useState(0);
 
   useEffect(() => {
-    // getPlacesData();
-    getPlacesData().then((data) => {
-      console.log("getPlacesData", data);
-      // setPosts(data);
-    });
+    navigator.geolocation.getCurrentPosition(
+      ({ coords: { latitude, longitude } }) => {
+        setCoordinates({ lat: latitude, lng: longitude });
+      }
+    );
   }, []);
+
+  useEffect(() => {
+    bounds &&
+      getPlacesData(bounds.sw, bounds.ne).then((data) => {
+        console.log("getPlacesData", data);
+        setPlaces(data);
+      });
+  }, [coordinates, bounds]);
 
   return (
     <>
@@ -26,13 +37,17 @@ function App() {
       <Header />
       <Grid container spacing={3} style={{ width: "100%" }}>
         <Grid item xs={12} md={4}>
-          <List />
+          <List places={places} />
         </Grid>
         <Grid item xs={12} md={4}>
-          <Map />
+          <Map
+            setCoordinates={setCoordinates}
+            setBounds={setBounds}
+            coordinates={coordinates}
+          />
         </Grid>
       </Grid>
-      <div>{posts}</div>
+      <h2>Count is: {count}</h2>
     </>
   );
 }
