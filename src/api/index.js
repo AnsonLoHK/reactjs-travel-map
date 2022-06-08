@@ -17,10 +17,10 @@ const options = {
 };
 
 // Want to use async/await? Add the `async` keyword to your outer function/method.
-const axiosPlaceData = async () => {
+export const getPlacesData = async () => {
   try {
     const { data: response } = await axios.get(URL, options);
-    return response;
+    return response.data;
   } catch (err) {
     if (err.response) {
       // The client was given an error response (5xx, 4xx)

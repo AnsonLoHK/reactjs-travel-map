@@ -1,6 +1,8 @@
 import "./App.css";
-
+import React, { useState, useEffect } from "react";
 import { CssBaseline, Grid } from "@material-ui/core";
+
+import { getPlacesData } from "./api";
 
 // 元件
 import Header from "./components/Header/Header";
@@ -8,6 +10,16 @@ import List from "./components/List/List";
 import Map from "./components/Map/Map";
 
 function App() {
+  const [posts, setPosts] = useState([]);
+
+  useEffect(() => {
+    // getPlacesData();
+    getPlacesData().then((data) => {
+      console.log("getPlacesData", data);
+      // setPosts(data);
+    });
+  }, []);
+
   return (
     <>
       <CssBaseline />
@@ -20,6 +32,7 @@ function App() {
           <Map />
         </Grid>
       </Grid>
+      <div>{posts}</div>
     </>
   );
 }
