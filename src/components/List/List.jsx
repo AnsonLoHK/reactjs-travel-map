@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import {
   CircularProgress,
-  Paper,
   Grid,
   Typography,
   InputLabel,
@@ -20,6 +19,28 @@ const List = () => {
   const places = [
     { name: "cool place" },
     { name: "best bear" },
+    { name: "best steak" },
+    { name: "best steak" },
+    { name: "best steak" },
+    { name: "best steak" },
+    { name: "best steak" },
+    { name: "best steak" },
+    { name: "best steak" },
+    { name: "best steak" },
+    { name: "best steak" },
+    { name: "best steak" },
+    { name: "best steak" },
+    { name: "best steak" },
+    { name: "best steak" },
+    { name: "best steak" },
+    { name: "best steak" },
+    { name: "best steak" },
+    { name: "best steak" },
+    { name: "best steak" },
+    { name: "best steak" },
+    { name: "best steak" },
+    { name: "best steak" },
+    { name: "best steak" },
     { name: "best steak" },
     { name: "best steak" },
   ];
@@ -49,15 +70,14 @@ const List = () => {
           <MenuItem value={4.5}>Above 4.5</MenuItem>
         </Select>
       </FormControl>
-      <Grid item xs={12}>
-        <Grid container justifyContent="center" spacing={2}>
-          {places?.map((place, i) => (
-            <Grid key={i} item>
-              <Paper className={classes.paper} />
-              <Card />
-            </Grid>
-          ))}
-        </Grid>
+
+      <Grid container spacing={2}>
+        {places?.map((place, i) => (
+          <Grid key={i} item xs={12}>
+            {/* <Paper className={classes.paper} /> */}
+            <PlaceDetails place={place} />
+          </Grid>
+        ))}
       </Grid>
     </div>
   );
