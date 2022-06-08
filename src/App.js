@@ -13,7 +13,6 @@ function App() {
   const [places, setPlaces] = useState([]);
   const [coordinates, setCoordinates] = useState({});
   const [bounds, setBounds] = useState(null);
-  const [count, setCount] = useState(0);
 
   useEffect(() => {
     navigator.geolocation.getCurrentPosition(
@@ -39,6 +38,34 @@ function App() {
         <Grid item xs={12} md={4}>
           <List places={places} />
         </Grid>
+        <Grid>
+          <label>Latitude</label>
+          <input
+            type="number"
+            id="lat"
+            name="lat"
+            value={coordinates.lat}
+            onChange={(event) =>
+              setCoordinates({
+                ...coordinates,
+                lat: Number(event.target.value),
+              })
+            }
+          />
+          <label>longitude</label>
+          <input
+            type="number"
+            id="lng"
+            name="lng"
+            value={coordinates.lng}
+            onChange={(event) =>
+              setCoordinates({
+                ...coordinates,
+                lng: Number(event.target.value),
+              })
+            }
+          />
+        </Grid>
         <Grid item xs={12} md={4}>
           <Map
             setCoordinates={setCoordinates}
@@ -47,7 +74,6 @@ function App() {
           />
         </Grid>
       </Grid>
-      <h2>Count is: {count}</h2>
     </>
   );
 }

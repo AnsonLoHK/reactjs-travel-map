@@ -15,7 +15,6 @@ const Map = ({ setCoordinates, setBounds, coordinates }) => {
     console.log("onChange", e);
     // 0608 座標在日本 (可能跟vpn位置有關)
     setCoordinates({ lat: e.center.lat, lng: e.center.lng });
-    // 邊界
     setBounds({ ne: e.marginBounds.ne, sw: e.marginBounds.sw });
   };
   const onChildClick = (e) => {
