@@ -4,6 +4,14 @@ export const useStyles = makeStyles((theme) => ({
   chip: {
     margin: "5px 5px 5px 0",
   },
+  root: {
+    display: "flex",
+    justifyContent: "center",
+    flexWrap: "wrap",
+    "& > *": {
+      margin: theme.spacing(0.5),
+    },
+  },
   subtitle: {
     display: "flex",
     alignItems: "center",

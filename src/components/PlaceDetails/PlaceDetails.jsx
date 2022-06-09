@@ -20,7 +20,6 @@ const styles = {
 };
 
 const PlaceDetails = ({ place }) => {
-  console.log("place", place);
   const classes = useStyles();
   return (
     <Card elevation={6}>
@@ -62,6 +61,7 @@ const PlaceDetails = ({ place }) => {
             </Typography>
           </Box>
         ))}
+        {/* 標籤 */}
       </CardContent>
       <CardActions>
         <Button size="small">Learn More</Button>

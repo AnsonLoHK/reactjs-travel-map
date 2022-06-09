@@ -31,10 +31,10 @@ function App() {
   }, []);
 
   useEffect(() => {
-    // console.log("coordinates, bounds", coordinates, bounds);
+    // console.log("coordinates, bounds", coordinates, bounds)
     bounds &&
       getPlacesData(bounds.sw, bounds.ne).then((data) => {
-        // console.log("getPlacesData", data);
+        console.log("getPlacesData", data);
         setPlaces(data);
       });
   }, [coordinates, bounds]);

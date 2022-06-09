@@ -12,7 +12,7 @@ const Map = ({ setCoordinates, setBounds, coordinates }) => {
   // const matches = useMediaQuery("(min-width:600px)");
 
   const onChange = (e) => {
-    // console.log("onChange", e);
+    console.log("onChange", e);
     // 0608 座標在日本 (可能跟vpn位置有關)
     setCoordinates({ lat: e.center.lat, lng: e.center.lng });
     setBounds({ ne: e.marginBounds.ne, sw: e.marginBounds.sw });
