@@ -14,15 +14,23 @@ function App() {
   const [coordinates, setCoordinates] = useState({});
   const [bounds, setBounds] = useState(null);
 
+  // useEffect(() => {
+  //   navigator.geolocation.getCurrentPosition(
+  //     ({ coords: { latitude, longitude } }) => {
+  //       setCoordinates({ lat: latitude, lng: longitude });
+  //     }
+  //   );
+  // }, []);
   useEffect(() => {
-    navigator.geolocation.getCurrentPosition(
-      ({ coords: { latitude, longitude } }) => {
-        setCoordinates({ lat: latitude, lng: longitude });
-      }
-    );
+    navigator.geolocation.getCurrentPosition((position) => {
+      var latitude = position.coords.latitude;
+      var longitude = position.coords.longitude;
+      setCoordinates({ lat: latitude, lng: longitude });
+    });
   }, []);
 
   useEffect(() => {
+    console.log("coordinates, bounds", coordinates, bounds);
     bounds &&
       getPlacesData(bounds.sw, bounds.ne).then((data) => {
         console.log("getPlacesData", data);
@@ -38,7 +46,16 @@ function App() {
         <Grid item xs={12} md={4}>
           <List places={places} />
         </Grid>
-        <Grid>
+
+        <Grid item xs={12} md={4}>
+          <Map
+            setCoordinates={setCoordinates}
+            setBounds={setBounds}
+            coordinates={coordinates}
+          />
+        </Grid>
+        {/* 自動偵測不同位置的經緯度 */}
+        <Grid item xs={12} md={4}>
           <label>Latitude</label>
           <input
             type="number"
@@ -64,13 +81,6 @@ function App() {
                 lng: Number(event.target.value),
               })
             }
-          />
-        </Grid>
-        <Grid item xs={12} md={4}>
-          <Map
-            setCoordinates={setCoordinates}
-            setBounds={setBounds}
-            coordinates={coordinates}
           />
         </Grid>
       </Grid>
