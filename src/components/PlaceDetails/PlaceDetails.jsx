@@ -53,10 +53,13 @@ const PlaceDetails = ({ place }) => {
             {place.ranking}
           </Typography>
         </Box>
-
+        {/* 歷年得獎區 */}
         {place?.awards?.map((award) => (
           <Box my={1} display="flex" justifyContent="space-between">
             <img src={award.images.small} alt={award.display_name} />
+            <Typography color="textSecondary" variant="subtitle2">
+              {award.display_name}
+            </Typography>
           </Box>
         ))}
       </CardContent>
