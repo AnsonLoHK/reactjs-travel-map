@@ -31,10 +31,10 @@ function App() {
   }, []);
 
   useEffect(() => {
-    console.log("coordinates, bounds", coordinates, bounds);
+    // console.log("coordinates, bounds", coordinates, bounds);
     bounds &&
       getPlacesData(bounds.sw, bounds.ne).then((data) => {
-        console.log("getPlacesData", data);
+        // console.log("getPlacesData", data);
         setPlaces(data);
       });
   }, [coordinates, bounds]);
@@ -44,10 +44,11 @@ function App() {
       <CssBaseline />
       <Header />
       <Grid container spacing={3} style={{ width: "100%" }}>
+        {/* 篩選區 */}
         <Grid item xs={12} md={4}>
           <List places={places} />
         </Grid>
-
+        {/* 地圖區 */}
         <Grid
           item
           xs={12}
