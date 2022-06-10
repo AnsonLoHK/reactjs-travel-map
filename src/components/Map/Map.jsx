@@ -40,12 +40,12 @@ const Map = ({ places, setCoordinates, setBounds, coordinates }) => {
               {!matches ? (
                 // 電腦模式
                 <div>
-                  <LocationOnOutlinedIcon />
+                  <LocationOnOutlinedIcon fontSize="large" color="secondary" />
                 </div>
               ) : (
                 // 手機模式
                 <div>
-                  <LocationOnOutlinedIcon />
+                  <LocationOnOutlinedIcon color="secondary" />
                 </div>
               )}
             </>
