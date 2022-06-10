@@ -109,8 +109,13 @@ const PlaceDetails = ({ place }) => {
 
         {/* 電話 */}
         {place?.phone && (
-          <Typography variant="subtitle2" color="textSecondary">
+          <Typography
+            variant="subtitle2"
+            color="textSecondary"
+            className={classes.spacing}
+          >
             <IconButton
+              variant="subtitle2"
               color="secondary"
               aria-label="電話"
               size="small"
@@ -131,7 +136,16 @@ const PlaceDetails = ({ place }) => {
               console.log("onClick");
             }}
           >
-            Learn More
+            Trip Advisor
+          </Button>
+          <Button
+            size="small"
+            color="primary"
+            onClick={() => {
+              console.log("onClick");
+            }}
+          >
+            website
           </Button>
         </CardActions>
       </CardContent>

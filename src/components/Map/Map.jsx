@@ -1,15 +1,15 @@
 import React from "react";
 import GoogleMapReact from "google-map-react";
-
+import useMediaQuery from "@material-ui/core/useMediaQuery";
 import { Paper, Typography } from "@material-ui/core";
 // import LocationOnOutlinedIcon from "@mui/icons-material/LocationOnOutlined";
 // import Rating from "@material-ui/lab/Rating";
 
 import useStyles from "./styles";
 
-const Map = ({ setCoordinates, setBounds, coordinates }) => {
+const Map = ({ places, setCoordinates, setBounds, coordinates }) => {
   const classes = useStyles();
-  // const matches = useMediaQuery("(min-width:600px)");
+  const matches = useMediaQuery("(min-width:600px)");
 
   const onChange = (e) => {
     console.log("onChange", e);
@@ -20,6 +20,9 @@ const Map = ({ setCoordinates, setBounds, coordinates }) => {
   const onChildClick = (e) => {
     // console.log("onChildClick", e);
   };
+
+  console.log("Map->places!", places);
+
   return (
     <>
       <div className={classes.mapContainer}>
@@ -32,7 +35,19 @@ const Map = ({ setCoordinates, setBounds, coordinates }) => {
           options={""}
           onChange={onChange}
           onChildClick={onChildClick}
-        ></GoogleMapReact>
+        >
+          {places?.map(({ place, index }) => (
+            <>
+              {!matches ? (
+                // 電腦模式
+                <div>電腦模式</div>
+              ) : (
+                // 手機模式
+                <div>手機模式</div>
+              )}
+            </>
+          ))}
+        </GoogleMapReact>
         <Paper />
         <Typography />
       </div>

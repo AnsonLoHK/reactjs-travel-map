@@ -71,6 +71,7 @@ function App() {
             setCoordinates={setCoordinates}
             setBounds={setBounds}
             coordinates={coordinates}
+            places={places}
           />
         </Grid>
         {/* 自動偵測不同位置的經緯度 */}
