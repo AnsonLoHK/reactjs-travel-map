@@ -45,7 +45,7 @@ const List = ({ places }) => {
         {places?.map((place, index) => (
           <Grid key={index} item xs={12}>
             {/* <Paper className={classes.paper} /> */}
-            <PlaceDetails key={index} place={place} />
+            <PlaceDetails place={place} />
           </Grid>
         ))}
       </Grid>

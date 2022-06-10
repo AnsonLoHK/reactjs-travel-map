@@ -31,24 +31,41 @@ const Map = ({ places, setCoordinates, setBounds, coordinates }) => {
           defaultCenter={coordinates}
           center={coordinates}
           margin={[50, 50, 50, 50]}
-          options={""}
           onChange={onChange}
           onChildClick={onChildClick}
         >
           {places?.map(({ place, index }) => (
-            <>
+            <div
+              key={index}
+              className={classes.markerContainer}
+              lat={Number(place.latitude)}
+              lng={Number(place.longitude)}
+            >
               {!matches ? (
                 // 電腦模式
-                <div>
-                  <LocationOnOutlinedIcon fontSize="large" color="secondary" />
-                </div>
+                <LocationOnOutlinedIcon fontSize="large" color="secondary" />
               ) : (
                 // 手機模式
-                <div>
-                  <LocationOnOutlinedIcon color="secondary" />
-                </div>
+                <Paper className={classes.paper} elevation={3}>
+                  <Typography
+                    // className={classes.typography}
+                    variant="subtitle2"
+                    gutterBottom
+                  >
+                    {place.name}
+                  </Typography>
+
+                  <img
+                    className={classes.pointer}
+                    src={
+                      place.photo
+                        ? place.photo.images.large.url
+                        : "https://www.foodserviceandhospitality.com/wp-content/uploads/2016/09/Restaurant-Placeholder-001.jpg"
+                    }
+                  />
+                </Paper>
               )}
-            </>
+            </div>
           ))}
         </GoogleMapReact>
         <Paper />
