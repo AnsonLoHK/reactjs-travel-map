@@ -81,7 +81,7 @@ function App() {
             type="number"
             id="lat"
             name="lat"
-            value={coordinates.lat}
+            value={coordinates}
             onChange={(event) =>
               setCoordinates({
                 ...coordinates,
@@ -94,7 +94,7 @@ function App() {
             type="number"
             id="lng"
             name="lng"
-            value={coordinates.lng}
+            value={coordinates}
             onChange={(event) =>
               setCoordinates({
                 ...coordinates,

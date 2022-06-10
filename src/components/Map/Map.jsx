@@ -1,6 +1,7 @@
 import React from "react";
 import GoogleMapReact from "google-map-react";
 import PropTypes from "prop-types";
+import useMediaQuery from "@material-ui/core/useMediaQuery";
 import { Paper, Typography } from "@material-ui/core";
 // import LocationOnOutlinedIcon from "@mui/icons-material/LocationOnOutlined";
 // import Rating from "@material-ui/lab/Rating";
@@ -9,7 +10,7 @@ import useStyles from "./styles";
 
 const Map = ({ places, setCoordinates, setBounds, coordinates }) => {
   const classes = useStyles();
-  // const matches = useMediaQuery("(min-width:600px)");
+  const matches = useMediaQuery("(min-width:600px)");
 
   const onChange = (e) => {
     console.log("onChange", e);
