@@ -8,8 +8,11 @@ import {
   CardMedia,
   CardContent,
   CardActions,
+  Chip,
 } from "@material-ui/core";
 // import { PriceChange } from "@mui/icons-material";
+
+import TagFacesIcon from "@material-ui/icons/TagFaces";
 
 import { useStyles } from "./styles";
 
@@ -61,7 +64,20 @@ const PlaceDetails = ({ place }) => {
             </Typography>
           </Box>
         ))}
-        {/* 標籤 */}
+
+        {place?.cuisine?.map(({ name, key }) => {
+          let icon;
+
+          if (name === "Chinese") {
+            icon = <TagFacesIcon />;
+          }
+
+          return (
+            <li key={key}>
+              <Chip icon={icon} label={name} />
+            </li>
+          );
+        })}
       </CardContent>
       <CardActions>
         <Button size="small">Learn More</Button>

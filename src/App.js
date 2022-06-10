@@ -11,11 +11,16 @@ import Map from "./components/Map/Map";
 
 function App() {
   const [places, setPlaces] = useState([]);
-  const [coordinates, setCoordinates] = useState({
-    lat: 0,
-    lng: 0,
-  });
+  const [coordinates, setCoordinates] = useState({});
   const [bounds, setBounds] = useState(null);
+
+  // const [chipData, setChipData] = useState([
+  //   { key: 0, label: "Central Asian" },
+  //   { key: 1, label: "Chinese" },
+  //   { key: 2, label: "Polymer" },
+  //   { key: 3, label: "React" },
+  //   { key: 4, label: "Vue.js" },
+  // ]);
 
   // useEffect(() => {
   //   navigator.geolocation.getCurrentPosition(
