@@ -1,6 +1,6 @@
 import React from "react";
 import GoogleMapReact from "google-map-react";
-import useMediaQuery from "@material-ui/core/useMediaQuery";
+import PropTypes from "prop-types";
 import { Paper, Typography } from "@material-ui/core";
 // import LocationOnOutlinedIcon from "@mui/icons-material/LocationOnOutlined";
 // import Rating from "@material-ui/lab/Rating";
@@ -9,7 +9,7 @@ import useStyles from "./styles";
 
 const Map = ({ places, setCoordinates, setBounds, coordinates }) => {
   const classes = useStyles();
-  const matches = useMediaQuery("(min-width:600px)");
+  // const matches = useMediaQuery("(min-width:600px)");
 
   const onChange = (e) => {
     console.log("onChange", e);
@@ -20,8 +20,6 @@ const Map = ({ places, setCoordinates, setBounds, coordinates }) => {
   const onChildClick = (e) => {
     // console.log("onChildClick", e);
   };
-
-  console.log("Map->places!", places);
 
   return (
     <>
@@ -36,23 +34,27 @@ const Map = ({ places, setCoordinates, setBounds, coordinates }) => {
           onChange={onChange}
           onChildClick={onChildClick}
         >
-          {places?.map(({ place, index }) => (
+          {/* {places?.map(({ place, index }) => (
             <>
               {!matches ? (
                 // 電腦模式
-                <div>電腦模式</div>
+                <div key={index}>電腦模式</div>
               ) : (
                 // 手機模式
                 <div>手機模式</div>
               )}
             </>
-          ))}
+          ))} */}
         </GoogleMapReact>
         <Paper />
         <Typography />
       </div>
     </>
   );
+};
+
+Map.propTypes = {
+  places: PropTypes.array,
 };
 
 export default Map;
