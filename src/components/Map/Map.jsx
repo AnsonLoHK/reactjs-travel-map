@@ -3,7 +3,7 @@ import GoogleMapReact from "google-map-react";
 import PropTypes from "prop-types";
 import useMediaQuery from "@material-ui/core/useMediaQuery";
 import { Paper, Typography } from "@material-ui/core";
-// import LocationOnOutlinedIcon from "@mui/icons-material/LocationOnOutlined";
+import LocationOnOutlinedIcon from "@material-ui/icons/LocationOnOutlined";
 // import Rating from "@material-ui/lab/Rating";
 
 import useStyles from "./styles";
@@ -35,17 +35,21 @@ const Map = ({ places, setCoordinates, setBounds, coordinates }) => {
           onChange={onChange}
           onChildClick={onChildClick}
         >
-          {/* {places?.map(({ place, index }) => (
+          {places?.map(({ place, index }) => (
             <>
               {!matches ? (
                 // 電腦模式
-                <div key={index}>電腦模式</div>
+                <div>
+                  <LocationOnOutlinedIcon />
+                </div>
               ) : (
                 // 手機模式
-                <div>手機模式</div>
+                <div>
+                  <LocationOnOutlinedIcon />
+                </div>
               )}
             </>
-          ))} */}
+          ))}
         </GoogleMapReact>
         <Paper />
         <Typography />

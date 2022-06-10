@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import {
-  CircularProgress,
   Grid,
   Typography,
   InputLabel,
@@ -46,7 +45,7 @@ const List = ({ places }) => {
         {places?.map((place, index) => (
           <Grid key={index} item xs={12}>
             {/* <Paper className={classes.paper} /> */}
-            <PlaceDetails place={place} />
+            <PlaceDetails key={index} place={place} />
           </Grid>
         ))}
       </Grid>
