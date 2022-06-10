@@ -4,6 +4,7 @@ export const useStyles = makeStyles((theme) => ({
   chip: {
     margin: "5px 5px 5px 0",
   },
+
   root: {
     display: "flex",
     justifyContent: "center",

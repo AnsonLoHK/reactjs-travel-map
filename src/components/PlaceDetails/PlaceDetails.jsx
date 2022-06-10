@@ -9,10 +9,13 @@ import {
   CardContent,
   CardActions,
   Chip,
+  IconButton,
 } from "@material-ui/core";
 // import { PriceChange } from "@mui/icons-material";
 
 import TagFacesIcon from "@material-ui/icons/TagFaces";
+import LocationOnIcon from "@material-ui/icons/LocationOn";
+import LocalPhoneIcon from "@material-ui/icons/LocalPhone";
 
 import { useStyles } from "./styles";
 
@@ -23,6 +26,7 @@ const styles = {
 };
 
 const PlaceDetails = ({ place }) => {
+  console.log("個別place", place);
   const classes = useStyles();
   return (
     <Card elevation={6}>
@@ -65,6 +69,7 @@ const PlaceDetails = ({ place }) => {
           </Box>
         ))}
 
+        {/* 佳餚區tags */}
         {place?.cuisine?.map(({ name, key }) => {
           let icon;
 
@@ -78,10 +83,58 @@ const PlaceDetails = ({ place }) => {
             </li>
           );
         })}
+
+        {/* 地址 */}
+        {place?.address && (
+          <Typography
+            gutterBottom
+            variant="subtitle2"
+            color="textSecondary"
+            className={classes.subtitle}
+          >
+            <IconButton
+              color="primary"
+              aria-label="位置"
+              size="small"
+              onClick={() => {
+                console.log("onClick");
+              }}
+            >
+              <LocationOnIcon />
+            </IconButton>
+
+            {place.address}
+          </Typography>
+        )}
+
+        {/* 電話 */}
+        {place?.phone && (
+          <Typography variant="subtitle2" color="textSecondary">
+            <IconButton
+              color="secondary"
+              aria-label="電話"
+              size="small"
+              onClick={() => {
+                // console.log("撥通電話");
+              }}
+            >
+              <LocalPhoneIcon />
+            </IconButton>
+            {place.phone}
+          </Typography>
+        )}
+        <CardActions>
+          <Button
+            size="small"
+            color="primary"
+            onClick={() => {
+              console.log("onClick");
+            }}
+          >
+            Learn More
+          </Button>
+        </CardActions>
       </CardContent>
-      <CardActions>
-        <Button size="small">Learn More</Button>
-      </CardActions>
     </Card>
   );
 };
