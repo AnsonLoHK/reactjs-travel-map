@@ -4,13 +4,13 @@ import PropTypes from "prop-types";
 import useMediaQuery from "@material-ui/core/useMediaQuery";
 import { Paper, Typography } from "@material-ui/core";
 import LocationOnOutlinedIcon from "@material-ui/icons/LocationOnOutlined";
-// import Rating from "@material-ui/lab/Rating";
+import Rating from "@material-ui/lab/Rating";
 
 import useStyles from "./styles";
 
 const Map = ({ places, setCoordinates, setBounds, coordinates }) => {
   const classes = useStyles();
-  const matches = useMediaQuery("(min-width:600px)");
+  const isDesktop = useMediaQuery("(min-width:600px)");
 
   const onChange = (e) => {
     console.log("onChange", e);
@@ -26,7 +26,7 @@ const Map = ({ places, setCoordinates, setBounds, coordinates }) => {
     <>
       <div className={classes.mapContainer}>
         <GoogleMapReact
-          bootstrapURLKeys={{ key: "AIzaSyBOubLjCL-vfB8Zol4e8cdBzdvpNF_pGdI" }}
+          bootstrapURLKeys={{ key: "AIzaSyDl-G7XSeUwsdHeiGTp0vPWX-0R5hhb0SU" }}
           defaultZoom={17}
           defaultCenter={coordinates}
           center={coordinates}
@@ -34,14 +34,14 @@ const Map = ({ places, setCoordinates, setBounds, coordinates }) => {
           onChange={onChange}
           onChildClick={onChildClick}
         >
-          {places?.map(({ place, index }) => (
+          {/* {places?.map(({ place, index }) => (
             <div
               key={index}
               className={classes.markerContainer}
               lat={Number(place.latitude)}
               lng={Number(place.longitude)}
             >
-              {!matches ? (
+              {!isDesktop ? (
                 // 電腦模式
                 <LocationOnOutlinedIcon fontSize="large" color="secondary" />
               ) : (
@@ -63,10 +63,11 @@ const Map = ({ places, setCoordinates, setBounds, coordinates }) => {
                         : "https://www.foodserviceandhospitality.com/wp-content/uploads/2016/09/Restaurant-Placeholder-001.jpg"
                     }
                   />
+                  <Rating />
                 </Paper>
               )}
             </div>
-          ))}
+          ))} */}
         </GoogleMapReact>
         <Paper />
         <Typography />
