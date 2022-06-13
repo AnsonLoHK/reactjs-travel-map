@@ -8,9 +8,15 @@ import Rating from "@material-ui/lab/Rating";
 
 import useStyles from "./styles";
 
-const Map = ({ places, setCoordinates, setBounds, coordinates }) => {
+const Map = ({
+  setChildClicked,
+  places,
+  setCoordinates,
+  setBounds,
+  coordinates,
+}) => {
   const classes = useStyles();
-  const isDesktop = useMediaQuery("(min-width:600px)");
+  const matches = useMediaQuery("(min-width:600px)");
 
   const onChange = (e) => {
     console.log("onChange", e);
@@ -18,9 +24,21 @@ const Map = ({ places, setCoordinates, setBounds, coordinates }) => {
     setCoordinates({ lat: e.center.lat, lng: e.center.lng });
     setBounds({ ne: e.marginBounds.ne, sw: e.marginBounds.sw });
   };
-  const onChildClick = (e) => {
-    // console.log("onChildClick", e);
-  };
+
+  // 似乎點餐點座標的圖卡會出現相關資訊
+  // const _onMapChildClick = (_hoverKey, childProps) => {
+  //   console.log("props", childProps);
+  // };
+
+  // const renderMarkers = (map, maps) => {
+  //   let marker = new maps.Marker({
+  //     position: { lat: coordinates.latitude, lng: coordinates.longitude },
+  //     map,
+  //     title: "Hello World!",
+  //   });
+  //   console.log("marker", marker);
+  //   return marker;
+  // };
 
   return (
     <>
@@ -32,42 +50,48 @@ const Map = ({ places, setCoordinates, setBounds, coordinates }) => {
           center={coordinates}
           margin={[50, 50, 50, 50]}
           onChange={onChange}
-          onChildClick={onChildClick}
+          onChildClick={(child) => setChildClicked(child)}
+          // onChildClick={_onMapChildClick}
+          // onGoogleApiLoaded={({ map, maps }) => renderMarkers(map, maps)}
         >
-          {/* {places?.map(({ place, index }) => (
-            <div
-              key={index}
-              className={classes.markerContainer}
-              lat={Number(place.latitude)}
-              lng={Number(place.longitude)}
-            >
-              {!isDesktop ? (
-                // 電腦模式
-                <LocationOnOutlinedIcon fontSize="large" color="secondary" />
-              ) : (
-                // 手機模式
-                <Paper className={classes.paper} elevation={3}>
-                  <Typography
-                    // className={classes.typography}
-                    variant="subtitle2"
-                    gutterBottom
-                  >
-                    {place.name}
-                  </Typography>
-
-                  <img
-                    className={classes.pointer}
-                    src={
-                      place.photo
-                        ? place.photo.images.large.url
-                        : "https://www.foodserviceandhospitality.com/wp-content/uploads/2016/09/Restaurant-Placeholder-001.jpg"
-                    }
-                  />
-                  <Rating />
-                </Paper>
-              )}
-            </div>
-          ))} */}
+          {places.length &&
+            places.map((place, i) => (
+              <div
+                className={classes.markerContainer}
+                lat={Number(place.latitude)}
+                lng={Number(place.longitude)}
+                key={i}
+              >
+                {!matches ? (
+                  <LocationOnOutlinedIcon color="primary" fontSize="large" />
+                ) : (
+                  <Paper elevation={3} className={classes.paper}>
+                    <Typography
+                      className={classes.typography}
+                      variant="subtitle2"
+                      gutterBottom
+                    >
+                      {place.name}
+                    </Typography>
+                    <img
+                      className={classes.pointer}
+                      src={
+                        place.photo
+                          ? place.photo.images.large.url
+                          : "https://www.foodserviceandhospitality.com/wp-content/uploads/2016/09/Restaurant-Placeholder-001.jpg"
+                      }
+                      alt=""
+                    />
+                    <Rating
+                      name="Rating Label"
+                      value={Number(place.rating)}
+                      size="small"
+                      readOnly
+                    />
+                  </Paper>
+                )}
+              </div>
+            ))}
         </GoogleMapReact>
         <Paper />
         <Typography />
@@ -80,4 +104,4 @@ Map.propTypes = {
   places: PropTypes.array,
 };
 
-export default Map;
+export { Map };

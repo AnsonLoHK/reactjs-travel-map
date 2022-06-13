@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, createRef, useRef } from "react";
 import {
   Grid,
   Typography,
@@ -10,13 +10,53 @@ import {
 import useStyles from "./styles";
 import PlaceDetails from "../PlaceDetails/PlaceDetails";
 
-const List = ({ places }) => {
+const arrLength = 5;
+const List = ({ childClicked, places }) => {
   const classes = useStyles();
   const [type, setType] = useState("restaurant");
   const [rating, setRating] = useState("");
+  const [elRefs, setElRefs] = useState([]);
 
+  const refs = useRef();
+  refs.current = [];
+  console.log("refs", refs);
+
+  // 0613範例
+  const addToRefs = (el) => {
+    if (el && !refs.current.includes(el)) {
+      refs.current.push(el);
+    }
+  };
+
+  // 0614 開始處理
+  useEffect(() => {
+    setElRefs((elRefs) =>
+      Array(places.length)
+        .fill()
+        .map((_, i) => elRefs[i] || createRef())
+    );
+  }, [places]);
+
+  let filledArray = new Array(10).fill(null).map(() => ({ hello: "goodbye" }));
+  console.log("filledArray", filledArray);
   return (
     <div className={classes.container}>
+      {/* 可刪 */}
+      {Array(places.length)
+        .fill()
+        .map((el, i) => (
+          <div ref={elRefs[i]} key={i}>
+            {el}
+          </div>
+        ))}
+      {/* 範例 0613 */}
+      {Array(arrLength)
+        .fill()
+        .map((el, i) => (
+          <div ref={addToRefs} key={i}>
+            {i}
+          </div>
+        ))}
       <Typography variant="h4">
         Restaurants, Hotel & Attractions around you
       </Typography>
@@ -42,8 +82,8 @@ const List = ({ places }) => {
       </FormControl>
 
       <Grid container spacing={2} className={classes.list}>
-        {places?.map((place, index) => (
-          <Grid key={index} item xs={12}>
+        {places?.map((place, i) => (
+          <Grid key={i} item xs={12}>
             {/* <Paper className={classes.paper} /> */}
             <PlaceDetails place={place} />
           </Grid>

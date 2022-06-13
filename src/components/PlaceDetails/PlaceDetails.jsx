@@ -11,7 +11,7 @@ import {
   Chip,
   IconButton,
 } from "@material-ui/core";
-// import { PriceChange } from "@mui/icons-material";
+import Rating from "@material-ui/lab/Rating";
 
 import TagFacesIcon from "@material-ui/icons/TagFaces";
 import LocationOnIcon from "@material-ui/icons/LocationOn";
@@ -43,6 +43,12 @@ const PlaceDetails = ({ place }) => {
         <Typography gutterBottom variant="h5">
           {place.name}
         </Typography>
+        <Box display="flex" justifyContent="space-between">
+          <Rating value={Number(place.rating)} readOnly />
+          <Typography gutterBottom variant="subtitle1">
+            out of {place.num_reviews} reviews
+          </Typography>
+        </Box>
         <Box display="flex" justifyContent="space-between">
           <Typography variant="subtitle1">price</Typography>
           <Typography gutterBottom variant="subtitle1">

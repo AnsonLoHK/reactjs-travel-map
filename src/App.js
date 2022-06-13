@@ -7,28 +7,13 @@ import { getPlacesData } from "./api";
 // 元件
 import Header from "./components/Header/Header";
 import List from "./components/List/List";
-import Map from "./components/Map/Map";
+import { Map } from "./components/Map/Map";
 
 function App() {
   const [places, setPlaces] = useState([]);
   const [coordinates, setCoordinates] = useState({});
   const [bounds, setBounds] = useState(null);
-
-  // const [chipData, setChipData] = useState([
-  //   { key: 0, label: "Central Asian" },
-  //   { key: 1, label: "Chinese" },
-  //   { key: 2, label: "Polymer" },
-  //   { key: 3, label: "React" },
-  //   { key: 4, label: "Vue.js" },
-  // ]);
-
-  // useEffect(() => {
-  //   navigator.geolocation.getCurrentPosition(
-  //     ({ coords: { latitude, longitude } }) => {
-  //       setCoordinates({ lat: latitude, lng: longitude });
-  //     }
-  //   );
-  // }, []);
+  const [childClicked, setChildClicked] = useState(null);
 
   useEffect(() => {
     navigator.geolocation.getCurrentPosition((position) => {
@@ -54,7 +39,7 @@ function App() {
       <Grid container spacing={3} style={{ width: "100%" }}>
         {/* 篩選區 */}
         <Grid item xs={12} md={4}>
-          <List places={places} />
+          <List places={places} childClicked={childClicked} />
         </Grid>
         {/* 地圖區 */}
         <Grid
@@ -72,6 +57,7 @@ function App() {
             setBounds={setBounds}
             coordinates={coordinates}
             places={places}
+            setChildClicked={setChildClicked}
           />
         </Grid>
         {/* 自動偵測不同位置的經緯度 */}
@@ -109,3 +95,12 @@ function App() {
 }
 
 export default App;
+
+// 另一種獲得coords的寫法
+// useEffect(() => {
+//   navigator.geolocation.getCurrentPosition(
+//     ({ coords: { latitude, longitude } }) => {
+//       setCoordinates({ lat: latitude, lng: longitude });
+//     }
+//   );
+// }, []);
