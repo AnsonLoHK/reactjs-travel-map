@@ -20,7 +20,7 @@ function App() {
   const [bounds, setBounds] = useState(null);
   const [childClicked, setChildClicked] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
-  const [type, setType] = useState("restaurant");
+  const [type, setType] = useState("restaurants");
   const [rating, setRating] = useState("");
   const matches = useMediaQuery("(max-width:600px)");
   const classes = useStyles();
@@ -41,13 +41,13 @@ function App() {
   useEffect(() => {
     setIsLoading(true);
     bounds &&
-      getPlacesData(bounds.sw, bounds.ne).then((data) => {
+      getPlacesData(type, bounds.sw, bounds.ne).then((data) => {
         // console.log("getPlacesData", data);
         setPlaces(data);
         // 拿到資料後便不繼續loading
         setIsLoading(false);
       });
-  }, [coordinates, bounds]);
+  }, [type, coordinates, bounds]);
 
   return (
     <>

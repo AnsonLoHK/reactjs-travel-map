@@ -64,7 +64,7 @@ const List = ({
               value={type}
               onChange={(event) => setType(event.target.value)}
             >
-              <MenuItem value="restaurant">Restaurant</MenuItem>
+              <MenuItem value="restaurants">Restaurant</MenuItem>
               <MenuItem value="hotels">Hotels</MenuItem>
               <MenuItem value="attractions">Attractions</MenuItem>
             </Select>
