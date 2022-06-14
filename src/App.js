@@ -14,6 +14,7 @@ function App() {
   const [coordinates, setCoordinates] = useState({});
   const [bounds, setBounds] = useState(null);
   const [childClicked, setChildClicked] = useState(null);
+  const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
     navigator.geolocation.getCurrentPosition((position) => {
@@ -24,11 +25,13 @@ function App() {
   }, []);
 
   useEffect(() => {
-    // console.log("coordinates, bounds", coordinates, bounds)
+    setIsLoading(true);
     bounds &&
       getPlacesData(bounds.sw, bounds.ne).then((data) => {
-        console.log("getPlacesData", data);
+        // console.log("getPlacesData", data);
         setPlaces(data);
+        // 拿到資料後便不繼續loading
+        setIsLoading(false);
       });
   }, [coordinates, bounds]);
 
@@ -39,7 +42,11 @@ function App() {
       <Grid container spacing={3} style={{ width: "100%" }}>
         {/* 篩選區 */}
         <Grid item xs={12} md={4}>
-          <List places={places} childClicked={childClicked} />
+          <List
+            places={places}
+            childClicked={childClicked}
+            isLoading={isLoading}
+          />
         </Grid>
         {/* 地圖區 */}
         <Grid
