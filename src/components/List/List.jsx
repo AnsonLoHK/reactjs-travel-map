@@ -20,11 +20,6 @@ const List = ({ isLoading, childClicked, places }) => {
   const [rating, setRating] = useState("");
   const [elRefs, setElRefs] = useState([]);
   const [progress, setProgress] = useState(30);
-  const myRef = useRef(null);
-
-  // 從最底部一瞬間跳為置頂位置
-  const executeScroll = () => myRef.current.scrollIntoView(); // run this function from an event handler or pass it to useEffect to execute scroll
-  useMountEffect(executeScroll); // Scroll on mount
 
   useEffect(() => {
     setElRefs((elRefs) =>
@@ -83,7 +78,6 @@ const List = ({ isLoading, childClicked, places }) => {
           </FormControl>
 
           <Grid container spacing={2} className={classes.list}>
-            <span ref={myRef}>起點</span>
             {places?.map((place, i) => (
               <Grid ref={elRefs[i]} key={i} item xs={12}>
                 {/* <Paper className={classes.paper} /> */}
@@ -94,7 +88,6 @@ const List = ({ isLoading, childClicked, places }) => {
                 />
               </Grid>
             ))}
-            <button onClick={executeScroll}>置頂</button>
           </Grid>
         </>
       )}

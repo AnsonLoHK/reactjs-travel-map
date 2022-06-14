@@ -1,6 +1,6 @@
 import "./App.css";
-import React, { useState, useEffect } from "react";
-import { CssBaseline, Grid } from "@material-ui/core";
+import React, { useRef, useState, useEffect } from "react";
+import { Grid } from "@material-ui/core";
 
 import { getPlacesData } from "./api";
 
@@ -8,13 +8,18 @@ import { getPlacesData } from "./api";
 import Header from "./components/Header/Header";
 import List from "./components/List/List";
 import { Map } from "./components/Map/Map";
-
+const useMountEffect = (fun) => useEffect(fun, []);
 function App() {
   const [places, setPlaces] = useState([]);
   const [coordinates, setCoordinates] = useState({});
   const [bounds, setBounds] = useState(null);
   const [childClicked, setChildClicked] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
+
+  const myRef = useRef(null);
+  // 從最底部一瞬間跳為置頂位置
+  const executeScroll = () => myRef.current.scrollIntoView(); // run this function from an event handler or pass it to useEffect to execute scroll
+  useMountEffect(executeScroll); // Scroll on mount
 
   useEffect(() => {
     navigator.geolocation.getCurrentPosition((position) => {
@@ -37,8 +42,8 @@ function App() {
 
   return (
     <>
-      <CssBaseline />
-      <Header />
+      {/* <CssBaseline /> */}
+      <Header myRef={myRef} />
       <Grid container spacing={3} style={{ width: "100%" }}>
         {/* 篩選區 */}
         <Grid item xs={12} md={4}>
@@ -97,6 +102,7 @@ function App() {
           />
         </Grid>
       </Grid>
+      <button onClick={executeScroll}>置頂</button>
     </>
   );
 }
