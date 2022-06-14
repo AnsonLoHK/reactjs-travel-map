@@ -20,11 +20,13 @@ function App() {
   const [bounds, setBounds] = useState(null);
   const [childClicked, setChildClicked] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
+  const [type, setType] = useState("restaurant");
+  const [rating, setRating] = useState("");
   const matches = useMediaQuery("(max-width:600px)");
   const classes = useStyles();
 
-  const myRef = useRef(null);
   // 從最底部一瞬間跳為置頂位置
+  const myRef = useRef(null);
   const executeScroll = () => myRef.current.scrollIntoView(); // run this function from an event handler or pass it to useEffect to execute scroll
   useMountEffect(executeScroll); // Scroll on mount
 
@@ -49,7 +51,6 @@ function App() {
 
   return (
     <>
-      <div>123</div>
       <Header myRef={myRef} />
       <Grid container spacing={3} style={{ width: "100%" }}>
         {/* 篩選區 */}
@@ -58,6 +59,10 @@ function App() {
             places={places}
             childClicked={childClicked}
             isLoading={isLoading}
+            type={type}
+            setType={setType}
+            rating={rating}
+            setRating={setRating}
           />
         </Grid>
         {/* 地圖區 */}

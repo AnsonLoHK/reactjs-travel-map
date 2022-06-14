@@ -12,13 +12,20 @@ import {
 import useStyles from "./styles";
 import PlaceDetails from "../PlaceDetails/PlaceDetails";
 
-const List = ({ isLoading, childClicked, places }) => {
+const List = ({
+  setRating,
+  rating,
+  setType,
+  type,
+  isLoading,
+  childClicked,
+  places,
+}) => {
   const classes = useStyles();
-  const [type, setType] = useState("restaurant");
-  const [rating, setRating] = useState("");
   const [elRefs, setElRefs] = useState([]);
   const [progress, setProgress] = useState(30);
 
+  // 對每個place進行refs掛勾
   useEffect(() => {
     setElRefs((elRefs) =>
       Array(places?.length)
