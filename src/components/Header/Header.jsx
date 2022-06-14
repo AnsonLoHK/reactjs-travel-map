@@ -8,10 +8,10 @@ import SearchIcon from "@material-ui/icons/Search";
 // component api
 import { AppBar, Toolbar, Typography, Box, InputBase } from "@material-ui/core";
 
-const Header = ({ myRef }) => {
+const Header = () => {
   const classes = useStyles();
   return (
-    <div ref={myRef}>
+    <div>
       <AppBar position="static">
         <Toolbar className={classes.toolbar}>
           <Typography variant="h6" className={classes.title}>

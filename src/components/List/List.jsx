@@ -1,4 +1,4 @@
-import React, { useState, useEffect, createRef, useRef } from "react";
+import React, { useState, useEffect, createRef } from "react";
 import {
   Box,
   CircularProgress,
@@ -12,8 +12,6 @@ import {
 import useStyles from "./styles";
 import PlaceDetails from "../PlaceDetails/PlaceDetails";
 
-const useMountEffect = (fun) => useEffect(fun, []);
-
 const List = ({ isLoading, childClicked, places }) => {
   const classes = useStyles();
   const [type, setType] = useState("restaurant");
@@ -23,7 +21,7 @@ const List = ({ isLoading, childClicked, places }) => {
 
   useEffect(() => {
     setElRefs((elRefs) =>
-      Array(places.length)
+      Array(places?.length)
         .fill()
         .map((_, i) => elRefs[i] || createRef())
     );

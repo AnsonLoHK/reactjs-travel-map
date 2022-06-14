@@ -25,21 +25,6 @@ const Map = ({
     setBounds({ ne: e.marginBounds.ne, sw: e.marginBounds.sw });
   };
 
-  // 似乎點餐點座標的圖卡會出現相關資訊
-  // const _onMapChildClick = (_hoverKey, childProps) => {
-  //   console.log("props", childProps);
-  // };
-
-  // const renderMarkers = (map, maps) => {
-  //   let marker = new maps.Marker({
-  //     position: { lat: coordinates.latitude, lng: coordinates.longitude },
-  //     map,
-  //     title: "Hello World!",
-  //   });
-  //   console.log("marker", marker);
-  //   return marker;
-  // };
-
   return (
     <>
       <div className={classes.mapContainer}>
@@ -54,7 +39,7 @@ const Map = ({
           // onChildClick={_onMapChildClick}
           // onGoogleApiLoaded={({ map, maps }) => renderMarkers(map, maps)}
         >
-          {places.length &&
+          {places?.length &&
             places.map((place, i) => (
               <div
                 className={classes.markerContainer}

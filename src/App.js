@@ -8,7 +8,9 @@ import { getPlacesData } from "./api";
 import Header from "./components/Header/Header";
 import List from "./components/List/List";
 import { Map } from "./components/Map/Map";
+
 const useMountEffect = (fun) => useEffect(fun, []);
+
 function App() {
   const [places, setPlaces] = useState([]);
   const [coordinates, setCoordinates] = useState({});
@@ -43,7 +45,8 @@ function App() {
   return (
     <>
       {/* <CssBaseline /> */}
-      <Header myRef={myRef} />
+      <div ref={myRef}>123</div>
+      <Header />
       <Grid container spacing={3} style={{ width: "100%" }}>
         {/* 篩選區 */}
         <Grid item xs={12} md={4}>
