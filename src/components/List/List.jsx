@@ -11,22 +11,16 @@ import useStyles from "./styles";
 import PlaceDetails from "../PlaceDetails/PlaceDetails";
 
 const arrLength = 5;
+const useMountEffect = (fun) => useEffect(fun, []);
 const List = ({ childClicked, places }) => {
   const classes = useStyles();
   const [type, setType] = useState("restaurant");
   const [rating, setRating] = useState("");
   const [elRefs, setElRefs] = useState([]);
+  const myRef = useRef(null);
 
-  const refs = useRef();
-  refs.current = [];
-  console.log("refs", refs);
-
-  // 0613範例
-  const addToRefs = (el) => {
-    if (el && !refs.current.includes(el)) {
-      refs.current.push(el);
-    }
-  };
+  const executeScroll = () => myRef.current.scrollIntoView(); // run this function from an event handler or pass it to useEffect to execute scroll
+  useMountEffect(executeScroll); // Scroll on mount
 
   // 0614 開始處理
   useEffect(() => {
@@ -37,26 +31,8 @@ const List = ({ childClicked, places }) => {
     );
   }, [places]);
 
-  let filledArray = new Array(10).fill(null).map(() => ({ hello: "goodbye" }));
-  console.log("filledArray", filledArray);
   return (
     <div className={classes.container}>
-      {/* 可刪 */}
-      {Array(places.length)
-        .fill()
-        .map((el, i) => (
-          <div ref={elRefs[i]} key={i}>
-            {el}
-          </div>
-        ))}
-      {/* 範例 0613 */}
-      {Array(arrLength)
-        .fill()
-        .map((el, i) => (
-          <div ref={addToRefs} key={i}>
-            {i}
-          </div>
-        ))}
       <Typography variant="h4">
         Restaurants, Hotel & Attractions around you
       </Typography>
@@ -82,12 +58,18 @@ const List = ({ childClicked, places }) => {
       </FormControl>
 
       <Grid container spacing={2} className={classes.list}>
+        <span ref={myRef}>起點</span>
         {places?.map((place, i) => (
-          <Grid key={i} item xs={12}>
+          <Grid ref={elRefs[i]} key={i} item xs={12}>
             {/* <Paper className={classes.paper} /> */}
-            <PlaceDetails place={place} />
+            <PlaceDetails
+              place={place}
+              selected={Number(childClicked) === i}
+              refProp={elRefs[i]}
+            />
           </Grid>
         ))}
+        <button onClick={executeScroll}>置頂</button>
       </Grid>
     </div>
   );
