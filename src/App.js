@@ -22,6 +22,8 @@ function App() {
   const [isLoading, setIsLoading] = useState(false);
   const [type, setType] = useState("restaurants");
   const [rating, setRating] = useState("");
+  const [filter, setFilter] = useState("");
+
   const matches = useMediaQuery("(max-width:600px)");
   const classes = useStyles();
 
@@ -29,6 +31,14 @@ function App() {
   const myRef = useRef(null);
   const executeScroll = () => myRef.current.scrollIntoView(); // run this function from an event handler or pass it to useEffect to execute scroll
   useMountEffect(executeScroll); // Scroll on mount
+
+  // 0615 從這邊開始
+  useEffect(() => {
+    const filteredPlaces = places.filter((place) => {
+      return place.rating > rating;
+    });
+    setFilter([...filteredPlaces]);
+  }, [rating]);
 
   useEffect(() => {
     navigator.geolocation.getCurrentPosition((position) => {
