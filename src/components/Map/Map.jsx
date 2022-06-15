@@ -25,6 +25,10 @@ const Map = ({
     setBounds({ ne: e.marginBounds.ne, sw: e.marginBounds.sw });
   };
 
+  const _onChildClick = (childProps) => {
+    setChildClicked(childProps);
+  };
+
   return (
     <>
       <div className={classes.mapContainer}>
@@ -35,9 +39,8 @@ const Map = ({
           center={coordinates}
           margin={[50, 50, 50, 50]}
           onChange={onChange}
-          onChildClick={(child) => setChildClicked(child)}
-          // onChildClick={_onMapChildClick}
-          // onGoogleApiLoaded={({ map, maps }) => renderMarkers(map, maps)}
+          // onChildClick={(child) => setChildClicked(child)}
+          onChildClick={_onChildClick}
         >
           {places?.length &&
             places.map((place, i) => (

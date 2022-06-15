@@ -31,7 +31,7 @@ const PlaceDetails = ({ refProp, selected, place }) => {
   if (selected)
     refProp?.current?.scrollIntoView({
       behavior: "smooth",
-      block: "end",
+      block: "start",
     });
 
   return (
