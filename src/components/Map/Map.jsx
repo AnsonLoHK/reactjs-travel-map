@@ -9,6 +9,7 @@ import Rating from "@material-ui/lab/Rating";
 import useStyles from "./styles";
 
 const Map = ({
+  coordinatesTest,
   setChildClicked,
   places,
   setCoordinates,
@@ -36,7 +37,7 @@ const Map = ({
           bootstrapURLKeys={{ key: "AIzaSyDl-G7XSeUwsdHeiGTp0vPWX-0R5hhb0SU" }}
           defaultZoom={17}
           defaultCenter={coordinates}
-          center={coordinates}
+          center={coordinatesTest.center}
           margin={[50, 50, 50, 50]}
           onChange={onChange}
           // onChildClick={(child) => setChildClicked(child)}

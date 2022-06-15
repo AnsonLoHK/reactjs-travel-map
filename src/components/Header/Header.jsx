@@ -1,27 +1,30 @@
 import React from "react";
 import useStyles from "./styles.js";
 // import { Autocomplete } from "@react-google-maps/api";
-
+// import { GoogleMap } from "react-google-maps";
 // icons
 import SearchIcon from "@material-ui/icons/Search";
-
 // component api
 import { AppBar, Toolbar, Typography, Box, InputBase } from "@material-ui/core";
 
-const Header = ({ myRef }) => {
+const google = (window.google = window.google ? window.google : {});
+console.log("google", google);
+
+const Header = ({ onPlaceChanged, onLoad, myRef }) => {
   const classes = useStyles();
+
   return (
     <div ref={myRef}>
       <AppBar position="static">
         <Toolbar className={classes.toolbar}>
           <Typography variant="h6" className={classes.title}>
-            Travel Advisor
+            旅行地圖
           </Typography>
           <Box display="flex">
             <Typography variant="h6" className={classes.title}>
               Explore new places
             </Typography>
-            {/* <Autocomplete> */}
+
             <div className={classes.search}>
               <div className={classes.searchIcon}>
                 <SearchIcon />
@@ -34,8 +37,6 @@ const Header = ({ myRef }) => {
                 }}
               />
             </div>
-
-            {/* </Autocomplete> */}
           </Box>
         </Toolbar>
       </AppBar>

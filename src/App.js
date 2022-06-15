@@ -8,7 +8,7 @@ import { getPlacesData } from "./api";
 import Header from "./components/Header/Header";
 import List from "./components/List/List";
 // 測試
-import Test from "./components/Test/Test";
+// import Test from "./components/Test/Test";
 import { Map } from "./components/Map/Map";
 import useStyles from "./styles";
 
@@ -17,6 +17,8 @@ const useMountEffect = (fun) => useEffect(fun, []);
 function App() {
   const [places, setPlaces] = useState([]);
   const [coordinates, setCoordinates] = useState({});
+  // 測試
+  const [coordinatesTest, setCoordinatesTest] = useState({});
   const [bounds, setBounds] = useState(null);
   const [childClicked, setChildClicked] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
@@ -29,7 +31,8 @@ function App() {
 
   // 從最底部一瞬間跳為置頂位置
   const myRef = useRef(null);
-  const executeScroll = () => myRef.current.scrollIntoView(); // run this function from an event handler or pass it to useEffect to execute scroll
+  const executeScroll = () =>
+    myRef.current.scrollIntoView({ behavior: "smooth", block: "start" }); // run this function from an event handler or pass it to useEffect to execute scroll
   useMountEffect(executeScroll); // Scroll on mount
 
   // 過濾rating
@@ -40,12 +43,23 @@ function App() {
     setFilterPlaces([...filteredPlaces]);
   }, [rating]);
 
+  // 獲取 經緯度
   useEffect(() => {
-    navigator.geolocation.getCurrentPosition((position) => {
-      var latitude = position.coords.latitude;
-      var longitude = position.coords.longitude;
-      setCoordinates({ lat: latitude, lng: longitude });
-    });
+    if ("geolocation" in navigator) {
+      navigator.geolocation.getCurrentPosition((position) => {
+        setCoordinatesTest({
+          center: {
+            lat: position.coords.latitude,
+            lng: position.coords.longitude,
+          },
+          lat: position.coords.latitude,
+          lng: position.coords.longitude,
+        });
+        var latitude = position.coords.latitude;
+        var longitude = position.coords.longitude;
+        setCoordinates({ lat: latitude, lng: longitude });
+      });
+    }
   }, []);
 
   useEffect(() => {
@@ -87,6 +101,8 @@ function App() {
           }}
         >
           <Map
+            // coordinatesTest 測試
+            coordinatesTest={coordinatesTest}
             setCoordinates={setCoordinates}
             setBounds={setBounds}
             coordinates={coordinates}
@@ -139,7 +155,8 @@ function App() {
         </Grid>
       ) : (
         <Paper elevation={3} className={classes.paper}>
-          <Test items={announcements} />
+          {/* 0615暫時先隱藏 */}
+          {/* <Test items={announcements} /> */}
         </Paper>
       )}
 
@@ -166,4 +183,13 @@ const announcements = [
 //       setCoordinates({ lat: latitude, lng: longitude });
 //     }
 //   );
+// }, []);
+
+// 獲取經緯度
+// useEffect(() => {
+//   navigator.geolocation.getCurrentPosition((position) => {
+//     var latitude = position.coords.latitude;
+//     var longitude = position.coords.longitude;
+//     setCoordinates({ lat: latitude, lng: longitude });
+//   });
 // }, []);
