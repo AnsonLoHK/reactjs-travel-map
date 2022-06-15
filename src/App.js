@@ -22,7 +22,7 @@ function App() {
   const [isLoading, setIsLoading] = useState(false);
   const [type, setType] = useState("restaurants");
   const [rating, setRating] = useState("");
-  const [filter, setFilter] = useState("");
+  const [filterPlaces, setFilterPlaces] = useState("");
 
   const matches = useMediaQuery("(max-width:600px)");
   const classes = useStyles();
@@ -32,12 +32,12 @@ function App() {
   const executeScroll = () => myRef.current.scrollIntoView(); // run this function from an event handler or pass it to useEffect to execute scroll
   useMountEffect(executeScroll); // Scroll on mount
 
-  // 0615 從這邊開始
+  // 過濾rating
   useEffect(() => {
     const filteredPlaces = places.filter((place) => {
       return place.rating > rating;
     });
-    setFilter([...filteredPlaces]);
+    setFilterPlaces([...filteredPlaces]);
   }, [rating]);
 
   useEffect(() => {
@@ -66,7 +66,7 @@ function App() {
         {/* 篩選區 */}
         <Grid item xs={12} md={4}>
           <List
-            places={places}
+            places={filterPlaces.length ? filterPlaces : places}
             childClicked={childClicked}
             isLoading={isLoading}
             type={type}
@@ -90,7 +90,7 @@ function App() {
             setCoordinates={setCoordinates}
             setBounds={setBounds}
             coordinates={coordinates}
-            places={places}
+            places={filterPlaces.length ? filterPlaces : places}
             setChildClicked={setChildClicked}
           />
         </Grid>
