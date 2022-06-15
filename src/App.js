@@ -25,7 +25,8 @@ function App() {
   const [type, setType] = useState("restaurants");
   const [rating, setRating] = useState("");
   const [filterPlaces, setFilterPlaces] = useState("");
-
+  const [autocomplete, setAutocomplete] = useState(null);
+  const [state, setState] = useState({});
   const matches = useMediaQuery("(max-width:600px)");
   const classes = useStyles();
 
@@ -34,6 +35,19 @@ function App() {
   const executeScroll = () =>
     myRef.current.scrollIntoView({ behavior: "smooth", block: "start" }); // run this function from an event handler or pass it to useEffect to execute scroll
   useMountEffect(executeScroll); // Scroll on mount
+
+  // ----------
+  const onLoad = (autoC) => setAutocomplete(autoC);
+
+  const onPlaceChanged = () => {
+    const place = autocomplete.getPlace();
+    const lat = place.geometry.location.lat();
+    const lng = place.geometry.location.lng();
+
+    setCoordinates({ lat, lng });
+    // var LatLng = place.geometry.location.toJSON();
+    // const { lat, lng } = place.geometry.location;
+  };
 
   // 過濾rating
   useEffect(() => {
@@ -60,6 +74,10 @@ function App() {
         setCoordinates({ lat: latitude, lng: longitude });
       });
     }
+    return () => {
+      setCoordinatesTest({}); // This worked for me
+      setCoordinates({});
+    };
   }, []);
 
   useEffect(() => {
@@ -75,7 +93,7 @@ function App() {
 
   return (
     <>
-      <Header myRef={myRef} />
+      <Header myRef={myRef} onPlaceChanged={onPlaceChanged} onLoad={onLoad} />
       <Grid container spacing={3} style={{ width: "100%" }}>
         {/* 篩選區 */}
         <Grid item xs={12} md={4}>
@@ -168,13 +186,13 @@ function App() {
 export default App;
 
 // ---------實驗性功能區---------
-const announcements = [
-  "點選餐廳卡牌後自動跳往List區中的位置",
-  "Rapid/Travel Advisor api串接list-in-boundary",
-  "在地圖中桌面模式顯示餐廳資訊",
-  "useMediaQuery偵測手機模式時呈現 LocationOnOutlinedIcon",
-  "把公告欄位放在paper裡面",
-];
+// const announcements = [
+//   "點選餐廳卡牌後自動跳往List區中的位置",
+//   "Rapid/Travel Advisor api串接list-in-boundary",
+//   "在地圖中桌面模式顯示餐廳資訊",
+//   "useMediaQuery偵測手機模式時呈現 LocationOnOutlinedIcon",
+//   "把公告欄位放在paper裡面",
+// ];
 
 // 另一種獲得coords的寫法
 // useEffect(() => {

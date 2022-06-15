@@ -34,7 +34,8 @@ const Map = ({
     <>
       <div className={classes.mapContainer}>
         <GoogleMapReact
-          bootstrapURLKeys={{ key: "AIzaSyDl-G7XSeUwsdHeiGTp0vPWX-0R5hhb0SU" }}
+          // public index有+scirpt的api key的話,這邊+不+都行
+          // bootstrapURLKeys={{ key: "AIzaSyDl-G7XSeUwsdHeiGTp0vPWX-0R5hhb0SU" }}
           defaultZoom={17}
           defaultCenter={coordinates}
           center={coordinatesTest.center}
