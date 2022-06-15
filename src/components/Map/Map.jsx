@@ -37,7 +37,7 @@ const Map = ({
           // public index有+scirpt的api key的話,這邊+不+都行
           // bootstrapURLKeys={{ key: "AIzaSyDl-G7XSeUwsdHeiGTp0vPWX-0R5hhb0SU" }}
           defaultZoom={17}
-          defaultCenter={coordinates}
+          // defaultCenter={coordinates}
           center={coordinatesTest.center}
           margin={[50, 50, 50, 50]}
           onChange={onChange}

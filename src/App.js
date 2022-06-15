@@ -1,7 +1,7 @@
 import "./App.css";
 import React, { useRef, useState, useEffect } from "react";
 import { Grid, Typography, Paper } from "@material-ui/core";
-import useMediaQuery from "@material-ui/core/useMediaQuery";
+// import useMediaQuery from "@material-ui/core/useMediaQuery";
 import { getPlacesData } from "./api";
 
 // 元件
@@ -26,15 +26,15 @@ function App() {
   const [rating, setRating] = useState("");
   const [filterPlaces, setFilterPlaces] = useState("");
   const [autocomplete, setAutocomplete] = useState(null);
-  const [state, setState] = useState({});
-  const matches = useMediaQuery("(max-width:600px)");
-  const classes = useStyles();
+  // const [state, setState] = useState({});
+  // const matches = useMediaQuery("(max-width:600px)");
+  // const classes = useStyles();
 
   // 從最底部一瞬間跳為置頂位置
-  const myRef = useRef(null);
-  const executeScroll = () =>
-    myRef.current.scrollIntoView({ behavior: "smooth", block: "start" }); // run this function from an event handler or pass it to useEffect to execute scroll
-  useMountEffect(executeScroll); // Scroll on mount
+  // const myRef = useRef(null);
+  // const executeScroll = () =>
+  //   myRef.current.scrollIntoView({ behavior: "smooth", block: "start" }); // run this function from an event handler or pass it to useEffect to execute scroll
+  // useMountEffect(executeScroll); // Scroll on mount
 
   // ----------
   const onLoad = (autoC) => setAutocomplete(autoC);
@@ -93,7 +93,7 @@ function App() {
 
   return (
     <>
-      <Header myRef={myRef} onPlaceChanged={onPlaceChanged} onLoad={onLoad} />
+      <Header onPlaceChanged={onPlaceChanged} onLoad={onLoad} />
       <Grid container spacing={3} style={{ width: "100%" }}>
         {/* 篩選區 */}
         <Grid item xs={12} md={4}>
@@ -129,7 +129,7 @@ function App() {
           />
         </Grid>
         {/* 自動偵測不同位置的經緯度 */}
-        <Grid item xs={12} md={4}>
+        {/* <Grid item xs={12} md={4}>
           <label>Latitude</label>
           <input
             type="number"
@@ -156,34 +156,37 @@ function App() {
               })
             }
           />
-        </Grid>
+        </Grid> */}
       </Grid>
       {/* 公告欄位(可刪) */}
-      {matches ? (
-        <Grid item xs={12} gutterBottom>
-          <Paper>
-            <Typography
-              // className={classes.typography}
-              variant="subtitle2"
-              gutterBottom
-            >
-              手機模式下不顯示公告欄位,請將網頁放大
-            </Typography>
-          </Paper>
-        </Grid>
-      ) : (
-        <Paper elevation={3} className={classes.paper}>
-          {/* 0615暫時先隱藏 */}
-          {/* <Test items={announcements} /> */}
-        </Paper>
-      )}
 
-      <button onClick={executeScroll}>回最上面</button>
+      {/* <button onClick={executeScroll}>回最上面</button> */}
     </>
   );
 }
 
 export default App;
+
+// {
+//   matches ? (
+//     <Grid item xs={12} gutterBottom>
+//       <Paper>
+//         <Typography
+//           // className={classes.typography}
+//           variant="subtitle2"
+//           gutterBottom
+//         >
+//           手機模式下不顯示公告欄位,請將網頁放大
+//         </Typography>
+//       </Paper>
+//     </Grid>
+//   ) : (
+//     <Paper elevation={3} className={classes.paper}>
+//       {/* 0615暫時先隱藏 */}
+//       {/* <Test items={announcements} /> */}
+//     </Paper>
+//   );
+// }
 
 // ---------實驗性功能區---------
 // const announcements = [
