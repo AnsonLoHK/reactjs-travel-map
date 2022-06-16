@@ -5,10 +5,11 @@ import useMediaQuery from "@material-ui/core/useMediaQuery";
 import { Paper, Typography } from "@material-ui/core";
 import LocationOnOutlinedIcon from "@material-ui/icons/LocationOnOutlined";
 import Rating from "@material-ui/lab/Rating";
-
+import mapStyles from "../../mapStyles";
 import useStyles from "./styles";
 
 const Map = ({
+  weatherData,
   coordinatesTest,
   setChildClicked,
   places,
@@ -37,11 +38,15 @@ const Map = ({
           // public index有+scirpt的api key的話,這邊+不+都行
           // bootstrapURLKeys={{ key: "AIzaSyDl-G7XSeUwsdHeiGTp0vPWX-0R5hhb0SU" }}
           defaultZoom={17}
-          // defaultCenter={coordinates}
+          defaultCenter={coordinates}
           center={coordinatesTest.center}
           margin={[50, 50, 50, 50]}
           onChange={onChange}
-          // onChildClick={(child) => setChildClicked(child)}
+          options={{
+            disableDefaultUI: true,
+            zoomControl: true,
+            styles: mapStyles,
+          }}
           onChildClick={_onChildClick}
         >
           {places?.length &&
@@ -80,6 +85,17 @@ const Map = ({
                     />
                   </Paper>
                 )}
+              </div>
+            ))}
+
+          {weatherData?.list?.length &&
+            weatherData.list.map((data, i) => (
+              <div key={i} lat={data.coord.lat} lng={data.coord.lon}>
+                <img
+                  src={`http://openweathermap.org/img/w/${data.weather[0].icon}.png`}
+                  height="70px"
+                  alt=""
+                />
               </div>
             ))}
         </GoogleMapReact>

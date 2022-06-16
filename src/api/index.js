@@ -1,11 +1,10 @@
 import axios from "axios";
 
-// Want to use async/await? Add the `async` keyword to your outer function/method.
+// 此種方式寫法比較漂亮
 export const getPlacesData = async (type, sw, ne) => {
   try {
     const { data: response } = await axios.get(
       `https://travel-advisor.p.rapidapi.com/${type}/list-in-boundary`,
-
       {
         params: {
           bl_latitude: sw.lat,
@@ -20,7 +19,7 @@ export const getPlacesData = async (type, sw, ne) => {
         },
       }
     );
-    return response.data;
+    return response;
   } catch (err) {
     if (err.response) {
       // The client was given an error response (5xx, 4xx)
@@ -36,3 +35,34 @@ export const getPlacesData = async (type, sw, ne) => {
     }
   }
 };
+
+// 0616 測試 天氣 (換個方式寫)
+async function Test(lat, lng) {
+  try {
+    if (lat && lng) {
+      let res = await axios({
+        method: "GET",
+        url: "https://community-open-weather-map.p.rapidapi.com/find",
+        // params: { lat, lon: lng },
+        params: {
+          // q: "London,uk", //應該可有可無
+          lat,
+          lon: lng,
+        },
+        headers: {
+          "X-RapidAPI-Key":
+            "a8cfee3addmsh457470a3c5712a8p124c0ejsn6b81bb091743",
+          "X-RapidAPI-Host": "community-open-weather-map.p.rapidapi.com",
+        },
+      });
+      let data = res.data;
+      return data;
+    }
+  } catch (error) {
+    console.log(error.response); // this is the main part. Use the response property from the error object
+
+    return error.response;
+  }
+}
+
+export default Test;

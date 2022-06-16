@@ -1,8 +1,8 @@
-import "./App.css";
-import React, { useRef, useState, useEffect } from "react";
-import { Grid, Typography, Paper } from "@material-ui/core";
+import React, { useState, useEffect } from "react";
+import { CssBaseline, Grid } from "@material-ui/core";
 // import useMediaQuery from "@material-ui/core/useMediaQuery";
 import { getPlacesData } from "./api";
+import Test from "./api";
 
 // 元件
 import Header from "./components/Header/Header";
@@ -10,9 +10,11 @@ import List from "./components/List/List";
 // 測試
 // import Test from "./components/Test/Test";
 import { Map } from "./components/Map/Map";
-import useStyles from "./styles";
+// import { ClassSharp } from "@material-ui/icons";
 
-const useMountEffect = (fun) => useEffect(fun, []);
+// import useStyles from "./styles";
+
+// const useMountEffect = (fun) => useEffect(fun, []);
 
 function App() {
   const [places, setPlaces] = useState([]);
@@ -26,6 +28,7 @@ function App() {
   const [rating, setRating] = useState("");
   const [filterPlaces, setFilterPlaces] = useState("");
   const [autocomplete, setAutocomplete] = useState(null);
+  const [weatherData, setWeatherData] = useState([]);
   // const [state, setState] = useState({});
   // const matches = useMediaQuery("(max-width:600px)");
   // const classes = useStyles();
@@ -40,13 +43,10 @@ function App() {
   const onLoad = (autoC) => setAutocomplete(autoC);
 
   const onPlaceChanged = () => {
-    const place = autocomplete.getPlace();
-    const lat = place.geometry.location.lat();
-    const lng = place.geometry.location.lng();
+    const lat = autocomplete.getPlace().geometry.location.lat();
+    const lng = autocomplete.getPlace().geometry.location.lng();
 
     setCoordinates({ lat, lng });
-    // var LatLng = place.geometry.location.toJSON();
-    // const { lat, lng } = place.geometry.location;
   };
 
   // 過濾rating
@@ -80,19 +80,32 @@ function App() {
     };
   }, []);
 
+  // 透過api回傳data
   useEffect(() => {
     setIsLoading(true);
     bounds &&
-      getPlacesData(type, bounds.sw, bounds.ne).then((data) => {
-        // console.log("getPlacesData", data);
-        setPlaces(data);
+      getPlacesData(type, bounds.sw, bounds.ne).then((res) => {
+        console.log("getPlacesData", res.data);
+
+        // setPlaces(data);
+        setPlaces(
+          res.data.filter((place) => place.name && place.num_reviews > 0)
+        );
+
         // 拿到資料後便不繼續loading
         setIsLoading(false);
       });
-  }, [type, coordinates, bounds]);
+    if (bounds) {
+      Test(coordinates.lat, coordinates.lng).then((data) =>
+        setWeatherData(data)
+      );
+      console.log("weatherData", weatherData);
+    }
+  }, [type, bounds]);
 
   return (
     <>
+      <CssBaseline />
       <Header onPlaceChanged={onPlaceChanged} onLoad={onLoad} />
       <Grid container spacing={3} style={{ width: "100%" }}>
         {/* 篩選區 */}
@@ -126,6 +139,7 @@ function App() {
             coordinates={coordinates}
             places={filterPlaces.length ? filterPlaces : places}
             setChildClicked={setChildClicked}
+            weatherData={weatherData}
           />
         </Grid>
         {/* 自動偵測不同位置的經緯度 */}
