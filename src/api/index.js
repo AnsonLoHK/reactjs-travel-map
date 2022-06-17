@@ -4,7 +4,7 @@ import axios from "axios";
 export const getPlacesData = async (type, sw, ne) => {
   try {
     const { data: response } = await axios.get(
-      `https://travel-advisor.p.rapidapi.com/${type}/list-in-boundary`,
+      // `https://travel-advisor.p.rapidapi.com/${type}/list-in-boundary`,
       {
         params: {
           bl_latitude: sw.lat,
@@ -13,8 +13,7 @@ export const getPlacesData = async (type, sw, ne) => {
           tr_latitude: ne.lat,
         },
         headers: {
-          "X-RapidAPI-Key":
-            "a8cfee3addmsh457470a3c5712a8p124c0ejsn6b81bb091743",
+          "X-RapidAPI-Key": process.env.REACT_APP_RAPIDAPI_TRAVEL_API_KEY,
           "X-RapidAPI-Host": "travel-advisor.p.rapidapi.com",
         },
       }
@@ -42,7 +41,7 @@ async function Test(lat, lng) {
     if (lat && lng) {
       let res = await axios({
         method: "GET",
-        url: "https://community-open-weather-map.p.rapidapi.com/find",
+        // url: "https://community-open-weather-map.p.rapidapi.com/find",
         // params: { lat, lon: lng },
         params: {
           // q: "London,uk", //應該可有可無
@@ -50,8 +49,7 @@ async function Test(lat, lng) {
           lon: lng,
         },
         headers: {
-          "X-RapidAPI-Key":
-            "a8cfee3addmsh457470a3c5712a8p124c0ejsn6b81bb091743",
+          "X-RapidAPI-Key": process.env.REACT_APP_RAPIDAPI_WEATHER_API_KEY,
           "X-RapidAPI-Host": "community-open-weather-map.p.rapidapi.com",
         },
       });
