@@ -1,49 +1,28 @@
 export default [
   {
-    featureType: "all",
-    elementType: "all",
+    featureType: "landscape.man_made",
+    elementType: "geometry",
     stylers: [
       {
-        saturation: "32",
-      },
-      {
-        lightness: "-3",
-      },
-      {
-        visibility: "on",
-      },
-      {
-        weight: "1.18",
+        color: "#f7f1df",
       },
     ],
   },
   {
-    featureType: "administrative",
-    elementType: "labels",
+    featureType: "landscape.natural",
+    elementType: "geometry",
     stylers: [
       {
-        visibility: "on",
+        color: "#d0e3b4",
       },
     ],
   },
   {
-    featureType: "landscape",
-    elementType: "labels",
+    featureType: "landscape.natural.terrain",
+    elementType: "geometry",
     stylers: [
       {
         visibility: "off",
-      },
-    ],
-  },
-  {
-    featureType: "landscape.man_made",
-    elementType: "all",
-    stylers: [
-      {
-        saturation: "-70",
-      },
-      {
-        lightness: "14",
       },
     ],
   },
@@ -52,7 +31,43 @@ export default [
     elementType: "labels",
     stylers: [
       {
-        visibility: "on",
+        visibility: "off",
+      },
+    ],
+  },
+  {
+    featureType: "poi.business",
+    elementType: "all",
+    stylers: [
+      {
+        visibility: "off",
+      },
+    ],
+  },
+  {
+    featureType: "poi.medical",
+    elementType: "geometry",
+    stylers: [
+      {
+        color: "#fbd3da",
+      },
+    ],
+  },
+  {
+    featureType: "poi.park",
+    elementType: "geometry",
+    stylers: [
+      {
+        color: "#bde6ab",
+      },
+    ],
+  },
+  {
+    featureType: "road",
+    elementType: "geometry.stroke",
+    stylers: [
+      {
+        visibility: "off",
       },
     ],
   },
@@ -66,35 +81,56 @@ export default [
     ],
   },
   {
-    featureType: "transit",
-    elementType: "labels",
+    featureType: "road.highway",
+    elementType: "geometry.fill",
     stylers: [
       {
-        visibility: "off",
+        color: "#ffe15f",
+      },
+    ],
+  },
+  {
+    featureType: "road.highway",
+    elementType: "geometry.stroke",
+    stylers: [
+      {
+        color: "#efd151",
+      },
+    ],
+  },
+  {
+    featureType: "road.arterial",
+    elementType: "geometry.fill",
+    stylers: [
+      {
+        color: "#ffffff",
+      },
+    ],
+  },
+  {
+    featureType: "road.local",
+    elementType: "geometry.fill",
+    stylers: [
+      {
+        color: "black",
+      },
+    ],
+  },
+  {
+    featureType: "transit.station.airport",
+    elementType: "geometry.fill",
+    stylers: [
+      {
+        color: "#cfb2db",
       },
     ],
   },
   {
     featureType: "water",
-    elementType: "all",
+    elementType: "geometry",
     stylers: [
       {
-        saturation: "100",
-      },
-      {
-        lightness: "-14",
-      },
-    ],
-  },
-  {
-    featureType: "water",
-    elementType: "labels",
-    stylers: [
-      {
-        visibility: "off",
-      },
-      {
-        lightness: "12",
+        color: "#a2daf2",
       },
     ],
   },
