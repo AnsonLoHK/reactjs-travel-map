@@ -4,7 +4,7 @@ import axios from "axios";
 export const getPlacesData = async (type, sw, ne) => {
   try {
     const { data: response } = await axios.get(
-      `https://travel-advisor.p.rapidapi.com/${type}/list-in-boundary`,
+      // `https://travel-advisor.p.rapidapi.com/${type}/list-in-boundary`,
       {
         params: {
           bl_latitude: sw.lat,
@@ -42,7 +42,7 @@ async function Test(lat, lng) {
     if (lat && lng) {
       let res = await axios({
         method: "GET",
-        url: "https://community-open-weather-map.p.rapidapi.com/find",
+        // url: "https://community-open-weather-map.p.rapidapi.com/find",
         // params: { lat, lon: lng },
         params: {
           // q: "London,uk", //應該可有可無
