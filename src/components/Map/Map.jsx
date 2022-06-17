@@ -31,6 +31,17 @@ const Map = ({
     setChildClicked(childProps);
   };
 
+  const props = {
+    getMapOptions: {
+      styles: mapStyles,
+      disableDefaultUI: true,
+      zoomControl: true,
+      clickableIcons: false,
+      mapTypeControl: true,
+      streetViewControl: true,
+    },
+  };
+
   return (
     <>
       <div className={classes.mapContainer}>
@@ -42,11 +53,7 @@ const Map = ({
           center={coordinatesTest.center}
           margin={[50, 50, 50, 50]}
           onChange={onChange}
-          options={{
-            disableDefaultUI: true,
-            zoomControl: true,
-            styles: mapStyles,
-          }}
+          options={props.getMapOptions}
           onChildClick={_onChildClick}
         >
           {places?.length &&
