@@ -19,8 +19,6 @@ import { Map } from "./components/Map/Map";
 function App() {
   const [places, setPlaces] = useState([]);
   const [coordinates, setCoordinates] = useState({});
-  // 測試
-  const [coordinatesTest, setCoordinatesTest] = useState({});
   const [bounds, setBounds] = useState(null);
   const [childClicked, setChildClicked] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
@@ -29,15 +27,6 @@ function App() {
   const [filterPlaces, setFilterPlaces] = useState("");
   const [autocomplete, setAutocomplete] = useState(null);
   const [weatherData, setWeatherData] = useState([]);
-  // const [state, setState] = useState({});
-  // const matches = useMediaQuery("(max-width:600px)");
-  // const classes = useStyles();
-
-  // 從最底部一瞬間跳為置頂位置
-  // const myRef = useRef(null);
-  // const executeScroll = () =>
-  //   myRef.current.scrollIntoView({ behavior: "smooth", block: "start" }); // run this function from an event handler or pass it to useEffect to execute scroll
-  // useMountEffect(executeScroll); // Scroll on mount
 
   // ----------
   const onLoad = (autoC) => setAutocomplete(autoC);
@@ -45,7 +34,7 @@ function App() {
   const onPlaceChanged = () => {
     const lat = autocomplete.getPlace().geometry.location.lat();
     const lng = autocomplete.getPlace().geometry.location.lng();
-
+    console.log("lat/lng", lat, lng);
     setCoordinates({ lat, lng });
   };
 
@@ -61,23 +50,11 @@ function App() {
   useEffect(() => {
     if ("geolocation" in navigator) {
       navigator.geolocation.getCurrentPosition((position) => {
-        setCoordinatesTest({
-          center: {
-            lat: position.coords.latitude,
-            lng: position.coords.longitude,
-          },
-          lat: position.coords.latitude,
-          lng: position.coords.longitude,
-        });
         var latitude = position.coords.latitude;
         var longitude = position.coords.longitude;
         setCoordinates({ lat: latitude, lng: longitude });
       });
     }
-    return () => {
-      setCoordinatesTest({}); // This worked for me
-      setCoordinates({});
-    };
   }, []);
 
   // 透過api回傳data
@@ -133,7 +110,7 @@ function App() {
         >
           <Map
             // coordinatesTest 測試
-            coordinatesTest={coordinatesTest}
+
             setCoordinates={setCoordinates}
             setBounds={setBounds}
             coordinates={coordinates}

@@ -10,7 +10,7 @@ import useStyles from "./styles";
 
 const Map = ({
   weatherData,
-  coordinatesTest,
+
   setChildClicked,
   places,
   setCoordinates,
@@ -51,7 +51,7 @@ const Map = ({
           bootstrapURLKeys={process.env.REACT_APP_GOOGLE_MAPS_API_KEY}
           defaultZoom={17}
           defaultCenter={coordinates}
-          center={coordinatesTest.center}
+          center={coordinates}
           margin={[50, 50, 50, 50]}
           onChange={onChange}
           options={props.getMapOptions}
