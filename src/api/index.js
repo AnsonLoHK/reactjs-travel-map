@@ -1,10 +1,11 @@
 import axios from "axios";
 
-// 此種方式寫法比較漂亮
+// 參考:
+// https://stackoverflow.com/questions/29775797/fetch-post-json-data
 export const getPlacesData = async (type, sw, ne) => {
   try {
-    const { data: response } = await axios.get(
-      // `https://travel-advisor.p.rapidapi.com/${type}/list-in-boundary`,
+    const { data } = await axios.get(
+      `https://travel-advisor.p.rapidapi.com/${type}/list-in-boundary`,
       {
         params: {
           bl_latitude: sw.lat,
@@ -18,8 +19,8 @@ export const getPlacesData = async (type, sw, ne) => {
         },
       }
     );
-
-    return response;
+    console.log(`data: `, data);
+    return data;
   } catch (err) {
     if (err.response) {
       // The client was given an error response (5xx, 4xx)
@@ -42,7 +43,7 @@ async function Test(lat, lng) {
     if (lat && lng) {
       let res = await axios({
         method: "GET",
-        // url: "https://community-open-weather-map.p.rapidapi.com/find",
+        url: "https://community-open-weather-map.p.rapidapi.com/find",
         // params: { lat, lon: lng },
         params: {
           // q: "London,uk", //應該可有可無
@@ -65,3 +66,39 @@ async function Test(lat, lng) {
 }
 
 export default Test;
+
+// 此種方式寫法比較漂亮
+// export const getPlacesData = async (type, sw, ne) => {
+//   try {
+//     const { data: response } = await axios.get(
+//       `https://travel-advisor.p.rapidapi.com/${type}/list-in-boundary`,
+//       {
+//         params: {
+//           bl_latitude: sw.lat,
+//           bl_longitude: sw.lng,
+//           tr_longitude: ne.lng,
+//           tr_latitude: ne.lat,
+//         },
+//         headers: {
+//           "X-RapidAPI-Key": process.env.REACT_APP_RAPIDAPI_TRAVEL_API_KEY,
+//           "X-RapidAPI-Host": "travel-advisor.p.rapidapi.com",
+//         },
+//       }
+//     );
+
+//     return response;
+//   } catch (err) {
+//     if (err.response) {
+//       // The client was given an error response (5xx, 4xx)
+//       // console.log(err.response.data);
+//       // console.log(err.response.status);
+//       // console.log(err.response.headers);
+//     } else if (err.request) {
+//       // The client never received a response, and the request was never left
+//       // console.log(err.request);
+//     } else {
+//       // Anything else
+//       // console.log("Error", err.message);
+//     }
+//   }
+// };
