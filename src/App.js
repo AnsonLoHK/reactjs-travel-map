@@ -109,7 +109,7 @@ function App() {
           }}
         >
           <Map
-            // coordinatesTest 測試
+
 
             setCoordinates={setCoordinates}
             setBounds={setBounds}
